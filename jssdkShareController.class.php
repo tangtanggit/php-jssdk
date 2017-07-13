@@ -108,7 +108,7 @@ class jssdkShareController extends Controller{
         $signature = sha1($string);
 
         $signPackage = array(
-          "appId"     => C('weixin.appid'),
+          "appId"     => $this->appid,
           "nonceStr"  => $nonceStr,
           "timestamp" => $timestamp,
           "url"       => $url,
