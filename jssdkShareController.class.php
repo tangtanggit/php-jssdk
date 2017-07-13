@@ -29,24 +29,24 @@ class jssdkShareController extends Controller{
 		
 		$this->appid = C('weixin.appid');
 		$this->appsecret = C('weixin.appsecret');
-	}
+       }
 
-	/**
-	* 对应的控制器模板 index.html
-	* 这里对应要分享的页面
-	* @return index.html 显示模板
-	*/
-	public function index(){
-		// 获取signPackage 复制给模板 配置wx.config
-		$signPackage = $this->getSignPackage();
-		$this->wxdata = $signPackage;
-		$this->display();
-	}
-	/**
-	* 第一步：获取access_token
-	* @return string 32位字符token 错误返回错误信息。。
-	*/
-	private function getAccess_Token(){
+     /**
+     * 对应的控制器模板 index.html
+     * 这里对应要分享的页面
+     * @return index.html 显示模板
+     */
+     public function index(){
+	// 获取signPackage 复制给模板 配置wx.config
+	$signPackage = $this->getSignPackage();
+	$this->wxdata = $signPackage;
+	$this->display();
+     }
+     /**
+     * 第一步：获取access_token
+     * @return string 32位字符token 错误返回错误信息。。
+     */
+     private function getAccess_Token(){
         //  调用tp内置S方法存缓存
         $wxtoken = S('wxtoken');
         if (!$wxtoken){  
@@ -69,7 +69,7 @@ class jssdkShareController extends Controller{
     * 第二步：获取32位access_token后继续获取jsapiticket
     * @return string/json 配置正确返回ticket，配置错误返回错误信息
     */
- 	private function getJsapiticket(){
+     private function getJsapiticket(){
         // 存两个小时 
         $ticket = S('ticket');
         if (!$ticket){  
