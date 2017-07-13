@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <title>要分享的页面-index模板页</title>  
+
+    </head>
+    <body>
+    	<h1>分享标题</h1>    
+    	<div>分享简介</div>    
+    	<img src="" alt="要分享的图片">
+    </body>
+</html>
+	<!-- 这里需要引入微信分享js-->
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+    // 初始化配置
+     wx.config({
+        debug: true, // 正式上线后成false不在弹出调试信息
+        appId: '<?php echo $wxdata["appId"];?>',
+        timestamp: '<?php echo $wxdata["timestamp"];?>',
+        nonceStr: '<?php echo $wxdata["nonceStr"];?>',
+        signature: '<?php echo $wxdata["signature"];?>',
+        jsApiList: [
+          // 所有要调用的 API 都要加到这个列表中
+          'onMenuShareTimeline', //分享到盆友圈
+          'onMenuShareAppMessage',//分享给朋友
+          'onMenuShareQQ',//分享到扣扣
+          'onMenuShareQZone',//分享到扣扣空间
+          // 'chooseImage',//拍照 // 这里拍照等上传图片等你可以吧时间放wx.ready方法外面绑定页面按钮实现自己的业务逻辑等
+          // 'uploadImage',//上传图片
+        ]
+      });
+     // 配置完成后会调用ready函数
+     wx.ready(function(){    
+    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。    
+        // alert("这里是read函数");
+        //点击分享到盆友圈
+        wx.onMenuShareTimeline({
+            title: '你要自定义分享的标题', // 分享标题
+            // link: encodeURIComponent('<?php echo "http://www.sxhlpt.com/resources/xindeshow/id/".$data["id"];?>'), 
+            link: '你要自定义分享的链接', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: '你要分享的图片', // 分享图标
+            success: function () { 
+                // 用户确认分享后执行的回调函数
+                alert("分享成功");
+            },
+            cancel: function () { 
+                // 用户取消分享后执行的回调函数
+                alert("取消分享");
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title: '你要自定义分享的标题', // 分享标题
+            desc: '你要分享的简介', // 分享描述
+            link: '你要分享的链接', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: '你要分享的图片', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () { 
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () { 
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        
+        wx.onMenuShareQQ({
+            title: '你要自定义分享的标题', // 分享标题
+            desc: '你要分享的简介', // 分享描述
+            link: '你要分享的链接', // 分享链接
+            imgUrl: '你要分享的封面图片', // 分享图标
+            success: function () { 
+               // 用户确认分享后执行的回调函数
+            },
+            cancel: function () { 
+               // 用户取消分享后执行的回调函数
+            }
+        });
+
+        wx.onMenuShareQZone({
+            title: '你要自定义分享的标题', // 分享标题
+            desc: '分享的简介', // 分享描述
+            link: '自定义分享的链接', // 分享链接
+            imgUrl: '自定义分享的图片', // 分享图标
+            success: function () { 
+               // 用户确认分享后执行的回调函数
+            },
+            cancel: function () { 
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    }); 
+ 
+    //错误返回信息
+    wx.error(function(res){    
+    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。    
+        alert(res);
+    });    
+    
+</script>
