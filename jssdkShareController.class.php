@@ -37,7 +37,9 @@ class jssdkShareController extends Controller{
 	* @return index.html 显示模板
 	*/
 	public function index(){
-
+		// 获取signPackage 复制给模板 配置wx.config
+		$signPackage = $this->getSignPackage();
+		$this->wxdata = $signPackage;
 		$this->display();
 	}
 	/**
