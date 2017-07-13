@@ -13,7 +13,7 @@ use Think\Controller;
 
 class jssdkShareController extends Controller{
 	private $appid = ''; //appid
-	private $appsecret = ''; //appid
+	private $appsecret = ''; //appsecret
 
 	/**
 	* 初始化 appid 和appsecret可以从在配置文件中获取，这里我调用config配置文件的参数。
